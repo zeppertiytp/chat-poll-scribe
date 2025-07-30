@@ -1,72 +1,94 @@
-# Welcome to your Lovable project
+# WhatsApp-like Chat Application
 
-## Project info
+A React-based chat application with OIDC authentication and HTTP polling for real-time updates.
 
-**URL**: https://lovable.dev/projects/b0ca19ac-0962-4404-9dc4-aaf42780b7ed
+## Features
 
-## How can I edit this code?
+- 🔐 OIDC Authentication (Keycloak integration)
+- 💬 WhatsApp-like chat interface
+- 👥 Direct and group conversations
+- 📎 File attachments support
+- 🔄 HTTP polling for real-time updates
+- 📱 Responsive design
 
-There are several ways of editing your application.
+## Quick Start with Mock Server
 
-**Use Lovable**
+1. **Start the development environment:**
+   ```bash
+   chmod +x start-dev.sh
+   ./start-dev.sh
+   ```
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/b0ca19ac-0962-4404-9dc4-aaf42780b7ed) and start prompting.
+2. **Access the application:**
+   - Frontend: http://localhost:5173
+   - Login with: `admin` / `admin`
 
-Changes made via Lovable will be committed automatically to this repo.
+3. **Sample data includes:**
+   - 3 users: Admin User, John Doe, Jane Smith
+   - 2 conversations with sample messages
+   - Direct and group chat examples
 
-**Use your preferred IDE**
+## Manual Setup
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Environment Variables
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Create a `.env.local` file with:
 
-Follow these steps:
+```env
+VITE_OIDC_ISSUER=http://localhost:8081
+VITE_OIDC_CLIENT_ID=chat-app
+VITE_OIDC_REDIRECT_URI=http://localhost:5173/callback
+VITE_API_BASE_URL=http://localhost:8080/api
+```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Start Mock Server
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+```bash
+cd mock-server
+npm install
+npm start
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Start Frontend
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Production Setup
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+See [Environment Setup Guide](docs/ENVIRONMENT_SETUP.md) for production configuration with real Keycloak and backend services.
 
-**Use GitHub Codespaces**
+## API Documentation
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+See [API Documentation](docs/API_DOCUMENTATION.md) for complete backend API specification.
 
-## What technologies are used for this project?
+## Architecture
 
-This project is built with:
+- **Frontend**: React + TypeScript + Tailwind CSS
+- **Authentication**: OIDC/Keycloak
+- **State Management**: React hooks + context
+- **Styling**: Tailwind CSS with custom design system
+- **Communication**: HTTP polling (no WebSockets)
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Development
 
-## How can I deploy this project?
+The application uses HTTP polling instead of WebSockets for real-time updates, making it compatible with various deployment environments and backend technologies.
 
-Simply open [Lovable](https://lovable.dev/projects/b0ca19ac-0962-4404-9dc4-aaf42780b7ed) and click on Share -> Publish.
+---
 
-## Can I connect a custom domain to my Lovable project?
+## Lovable Project Info
 
-Yes, you can!
+**URL**: https://lovable.dev/projects/b0ca19ac-0962-4404-9dc4-aaf42780b7ed
+
+### How can I edit this code?
+
+**Use Lovable**: Simply visit the [Lovable Project](https://lovable.dev/projects/b0ca19ac-0962-4404-9dc4-aaf42780b7ed) and start prompting.
+
+**Use your preferred IDE**: Clone this repo and push changes. The only requirement is having Node.js & npm installed.
+
+**Use GitHub Codespaces**: Navigate to the main page and click "Code" -> "Codespaces" -> "New codespace".
 
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
