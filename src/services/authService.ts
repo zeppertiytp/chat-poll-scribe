@@ -31,10 +31,10 @@ class AuthService {
 
   constructor() {
     this.config = {
-      issuer: process.env.VITE_OIDC_ISSUER || '',
-      clientId: process.env.VITE_OIDC_CLIENT_ID || '',
-      redirectUri: process.env.VITE_OIDC_REDIRECT_URI || `${window.location.origin}/callback`,
-      scope: process.env.VITE_OIDC_SCOPE || 'openid profile email'
+      issuer: import.meta.env.VITE_OIDC_ISSUER || '',
+      clientId: import.meta.env.VITE_OIDC_CLIENT_ID || '',
+      redirectUri: import.meta.env.VITE_OIDC_REDIRECT_URI || `${window.location.origin}/callback`,
+      scope: import.meta.env.VITE_OIDC_SCOPE || 'openid profile email'
     };
 
     // Load tokens from localStorage on initialization

@@ -28,7 +28,7 @@ class ApiService {
   private pollingTimeouts: Map<string, NodeJS.Timeout> = new Map();
 
   constructor() {
-    this.baseUrl = process.env.VITE_API_BASE_URL || 'http://localhost:8080/api';
+    this.baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api';
   }
 
   private async makeRequest<T>(
