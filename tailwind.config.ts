@@ -52,6 +52,18 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// Chat-specific colors
+				chat: {
+					background: 'hsl(var(--chat-background))',
+				},
+				message: {
+					sent: 'hsl(var(--message-sent))',
+					received: 'hsl(var(--message-received))',
+				},
+				conversation: {
+					hover: 'hsl(var(--conversation-hover))',
+				},
+				online: 'hsl(var(--online-indicator))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
