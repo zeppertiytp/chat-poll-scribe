@@ -4,8 +4,8 @@ import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 
 const app = express();
-const PORT = 8080;
-const OIDC_PORT = 8081;
+const PORT = process.env.API_PORT || 8080;
+const OIDC_PORT = process.env.OIDC_PORT || 8081;
 
 // JWT Secret for mock tokens
 const JWT_SECRET = 'mock-secret-key';
@@ -380,16 +380,53 @@ app.post('/api/messages/:id/read', authenticateToken, (req, res) => {
   });
 });
 
-// Start servers
-oidcApp.listen(OIDC_PORT, () => {
-  console.log(`🔐 Mock OIDC server running on http://localhost:${OIDC_PORT}`);
-});
+// Helper function to find available port
+const findAvailablePort = (startPort) => {
+  return new Promise((resolve) => {
+    const server = require('net').createServer();
+    server.listen(startPort, () => {
+      const port = server.address().port;
+      server.close(() => resolve(port));
+    });
+    server.on('error', () => {
+      resolve(findAvailablePort(startPort + 1));
+    });
+  });
+};
 
-app.listen(PORT, () => {
-  console.log(`🚀 Mock API server running on http://localhost:${PORT}`);
-  console.log(`📱 Frontend should run on http://localhost:5173`);
-  console.log(`\n🔧 Environment variables needed:`);
-  console.log(`VITE_OIDC_ISSUER=http://localhost:${OIDC_PORT}`);
-  console.log(`VITE_OIDC_CLIENT_ID=chat-app`);
-  console.log(`VITE_API_BASE_URL=http://localhost:${PORT}/api`);
-});
+// Start servers with port conflict handling
+const startServers = async () => {
+  try {
+    // Start OIDC server
+    const oidcPort = await findAvailablePort(OIDC_PORT);
+    oidcApp.listen(oidcPort, () => {
+      console.log(`🔐 Mock OIDC server running on http://localhost:${oidcPort}`);
+      if (oidcPort !== OIDC_PORT) {
+        console.log(`⚠️  Note: OIDC port changed from ${OIDC_PORT} to ${oidcPort} (original port was in use)`);
+        console.log(`   Update your .env.local: VITE_OIDC_ISSUER=http://localhost:${oidcPort}`);
+      }
+    });
+
+    // Start API server
+    const apiPort = await findAvailablePort(PORT);
+    app.listen(apiPort, () => {
+      console.log(`🚀 Mock API server running on http://localhost:${apiPort}`);
+      if (apiPort !== PORT) {
+        console.log(`⚠️  Note: API port changed from ${PORT} to ${apiPort} (original port was in use)`);
+        console.log(`   Update your .env.local: VITE_API_BASE_URL=http://localhost:${apiPort}/api`);
+      }
+      console.log(`📱 Frontend should run on http://localhost:5173`);
+      console.log(`\n🔧 Environment variables needed:`);
+      console.log(`VITE_OIDC_ISSUER=http://localhost:${oidcPort}`);
+      console.log(`VITE_OIDC_CLIENT_ID=chat-app`);
+      console.log(`VITE_API_BASE_URL=http://localhost:${apiPort}/api`);
+      console.log(`VITE_OIDC_REDIRECT_URI=http://localhost:5173/callback`);
+    });
+
+  } catch (error) {
+    console.error('Failed to start servers:', error);
+    process.exit(1);
+  }
+};
+
+startServers();

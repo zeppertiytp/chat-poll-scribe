@@ -111,8 +111,10 @@ The mock server provides:
 ### Common Issues
 
 1. **Port conflicts:**
-   - Frontend (5173), Mock Server (8080), OIDC (8081)
-   - Change ports in respective config files
+   - The mock server auto-detects available ports if 8080/8081 are in use
+   - Check console output for actual ports used
+   - Update `.env.local` if ports change
+   - To use specific ports: `API_PORT=8082 OIDC_PORT=8083 npm start` in mock-server
 
 2. **Node version issues:**
    ```bash
