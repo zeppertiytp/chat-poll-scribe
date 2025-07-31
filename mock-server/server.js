@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
+import { createServer } from 'net';
 
 const app = express();
 const PORT = process.env.API_PORT || 8080;
@@ -383,7 +384,7 @@ app.post('/api/messages/:id/read', authenticateToken, (req, res) => {
 // Helper function to find available port
 const findAvailablePort = (startPort) => {
   return new Promise((resolve) => {
-    const server = require('net').createServer();
+    const server = createServer();
     server.listen(startPort, () => {
       const port = server.address().port;
       server.close(() => resolve(port));
