@@ -31,8 +31,8 @@ class AuthService {
 
   constructor() {
     this.config = {
-      issuer: import.meta.env.VITE_OIDC_ISSUER || '',
-      clientId: import.meta.env.VITE_OIDC_CLIENT_ID || '',
+      issuer: import.meta.env.VITE_OIDC_ISSUER || 'http://localhost:8081',
+      clientId: import.meta.env.VITE_OIDC_CLIENT_ID || 'chat-app',
       redirectUri: import.meta.env.VITE_OIDC_REDIRECT_URI || `${window.location.origin}/callback`,
       scope: import.meta.env.VITE_OIDC_SCOPE || 'openid profile email'
     };

@@ -11,19 +11,29 @@ A React-based chat application with OIDC authentication and HTTP polling for rea
 - 🔄 HTTP polling for real-time updates
 - 📱 Responsive design
 
+## System Requirements
+
+- **Node.js**: Version 18.x or higher (LTS recommended)
+- **npm**: Version 8.x or higher
+
 ## Quick Start with Mock Server
 
-1. **Start the development environment:**
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Start the development environment:**
    ```bash
    chmod +x start-dev.sh
    ./start-dev.sh
    ```
 
-2. **Access the application:**
+3. **Access the application:**
    - Frontend: http://localhost:5173
    - Login with: `admin` / `admin`
 
-3. **Sample data includes:**
+4. **Sample data includes:**
    - 3 users: Admin User, John Doe, Jane Smith
    - 2 conversations with sample messages
    - Direct and group chat examples
