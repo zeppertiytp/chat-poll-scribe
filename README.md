@@ -13,8 +13,8 @@ A React-based chat application with OIDC authentication and HTTP polling for rea
 
 ## System Requirements
 
-- **Node.js**: Version 18.x or higher (LTS recommended)
-- **npm**: Version 8.x or higher
+- **Node.js**: Version 18.x or higher (tested with v20.19.4)
+- **npm**: Version 8.x or higher (tested with v10.8.2)
 
 ## Quick Start with Mock Server
 

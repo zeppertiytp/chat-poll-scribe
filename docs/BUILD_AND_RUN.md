@@ -2,9 +2,9 @@
 
 ## System Requirements
 
-- **Node.js**: Version 18.x or higher (LTS recommended)
-- **npm**: Version 8.x or higher (comes with Node.js)
-- **Operating System**: Windows, macOS, or Linux
+- **Node.js**: Version 18.x or higher (tested with v20.19.4)
+- **npm**: Version 8.x or higher (tested with v10.8.2)
+- **Operating System**: Linux, macOS, or Windows
 
 ## Quick Start (Recommended)
 
@@ -116,13 +116,15 @@ The mock server provides:
 
 2. **Node version issues:**
    ```bash
-   node --version  # Should be 18.x+
-   npm --version   # Should be 8.x+
+   node --version  # Should be 18.x+ (tested with v20.19.4)
+   npm --version   # Should be 8.x+ (tested with v10.8.2)
    ```
 
-3. **Permission errors on start-dev.sh:**
+3. **Permission errors on start-dev.sh (Linux/macOS):**
    ```bash
    chmod +x start-dev.sh
+   # If you still get permission errors:
+   bash start-dev.sh
    ```
 
 4. **Environment variables not loading:**

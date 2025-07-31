@@ -4,7 +4,10 @@ echo "🚀 Starting development environment..."
 
 # Start mock server in background
 cd mock-server
-npm install
+if [ ! -d "node_modules" ]; then
+  echo "📦 Installing mock server dependencies..."
+  npm install
+fi
 node server.js &
 MOCK_PID=$!
 
@@ -13,6 +16,10 @@ sleep 2
 
 # Go back to main directory and start frontend
 cd ..
+if [ ! -d "node_modules" ]; then
+  echo "📦 Installing frontend dependencies..."
+  npm install
+fi
 npm run dev &
 FRONTEND_PID=$!
 
